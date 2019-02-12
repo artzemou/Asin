@@ -1,0 +1,24 @@
+yarn run v1.12.3
+$ /home/emile/www/asin/node_modules/.bin/webpack --profile --json
+[styled-jsx] Loading plugin from path: styled-jsx-plugin-sass
+[styled-jsx] Loading plugin from path: styled-jsx-plugin-postcss
+Webpack Bundle Analyzer is started at http://127.0.0.1:8888
+Use Ctrl+C to close it
+Webpack Bundle Analyzer saved stats file to /home/emile/www/asin/dist/stats.json
+
+<--- Last few GCs --->
+
+[16188:0x55aa4d306270]    30080 ms: Mark-sweep 1414.0 (1471.5) -> 1413.9 (1440.0) MB, 2110.3 / 0.1 ms  (+ 0.0 ms in 0 steps since start of marking, biggest step 0.0 ms, walltime since start of marking 2347 ms) last resort GC in old space requested
+[16188:0x55aa4d306270]    32026 ms: Mark-sweep 1413.9 (1440.0) -> 1413.9 (1440.0) MB, 1944.0 / 0.0 ms  last resort GC in old space requested
+
+
+<--- JS stacktrace --->
+
+==== JS stack trace =========================================
+
+Security context: 0x225fd0018fe1 <JSObject>
+    2: /* anonymous */(aka /* anonymous */) [0x225fd0002241 <undefined>:645] [bytecode=0x3671ab19a429 offset=0](this=0x225fd0002241 <undefined>,argname=0x2980262a6691 <AST_SymbolFunarg map = 0x3aadca362341>)
+    3: arguments adaptor frame: 3->1
+    4: forEach(this=0x230b96afed91 <JSArray[3]>)
+    5: /* anonymous */ [0x225fd0002241 <undefined>:645] [bytecode=0x3671ab19a219 offset=46](this=0x10c1e...
+

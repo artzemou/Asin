@@ -4,6 +4,8 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const path = require('path');
+var CompressionPlugin = require('compression-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 // const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
@@ -100,18 +102,29 @@ module.exports = [
         // client side rendering
         target: 'web',
         entry: {
-            client: './src/client/index.js'
+            client: './src/client/index.js',
+            dashboard: './src/views/admin/Dashboard.js',
         },
         output: {
             path: common.path,
+            // filename: '[name].[contenthash].js',
             filename: '[name].js',
             publicPath: common.publicPath
         },
         plugins: [
             common.nodeEnv,
             new HtmlWebPackPlugin({
+                hash: true,
                 template: './src/client/index.html',
                 filename: './index.html'
+            }),
+            new CompressionPlugin({
+              filename: "[path].gz[query]",
+              algorithm: "gzip",
+              test: /\.js$|\.css$|\.html$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
+              threshold: 10240,
+              minRatio: 0.8,
+              deleteOriginalAssets: true
             })
         ],
         resolve: common.resolve,
@@ -133,6 +146,7 @@ module.exports = [
               cache: true,
               parallel: true,
               sourceMap: true // set to true if you want JS source maps
+
             })
           ]
         }
@@ -152,7 +166,9 @@ module.exports = [
         externals: [nodeExternals()],
         plugins: [
             common.nodeEnv,
-            new CleanWebpackPlugin(['dist'], {verbose: true})
+            new CleanWebpackPlugin(['dist'], {verbose: true}),
+            // new BundleAnalyzerPlugin({generateStatsFile:true})
+
         ],
         resolve: common.resolve,
         module: {
